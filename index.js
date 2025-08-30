@@ -7,6 +7,6 @@ export default class App {
     }
     start() {
         new HtmlAndCssHandler(this.config).main()
-        new Controller(this.config.defaultPoints).main()
+        new Controller(this.config.defaultPoints, this.config.dimensions).main()
     }
 }
