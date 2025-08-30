@@ -9,7 +9,15 @@
 </body>
 <script type="module">
     import App from './index.js'
-    let app = new App()
+    const config = {
+        dimensions: [50, 60],
+        pixelSize: 5,
+        defaultPoints: [
+            [10, 15],
+            [35, 20]
+        ]
+    }
+    let app = new App(config)
     app.start()
 </script>
 </html>
