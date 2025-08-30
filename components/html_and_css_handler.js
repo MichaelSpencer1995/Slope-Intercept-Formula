@@ -1,6 +1,6 @@
 export default class HtmlAndCssHandler {
     constructor(config) {
-        this.pageTitle = "Slope Intercept Formula"
+        this.pageTitle = "Plot pixels using slope intercept form"
         this.dimensions = config.dimensions
         this.pixelSize = config.pixelSize
         this.minX = 11
