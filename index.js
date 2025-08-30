@@ -6,6 +6,6 @@ export default class App {
         this.matrix
     }
     start() {
-        this.matrix = new HtmlAndCssHandler(this.config.dimensions, this.config.pixelSize).main()
+        this.matrix = new HtmlAndCssHandler(this.config).main()
     }
 }
