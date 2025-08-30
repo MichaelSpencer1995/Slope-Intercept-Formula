@@ -1,5 +1,6 @@
 export default class HtmlAndCssHandler {
     constructor(dimensions, pixelSize) {
+        this.pageTitle = "Slope Intercept Formula"
         this.dimensions = dimensions
         this.pixelSize = pixelSize
         this.minX = 11
@@ -10,7 +11,7 @@ export default class HtmlAndCssHandler {
         this.maxPixel = 8
     }
     setTitle() {
-        document.title = "Slope Intercept Formula"
+        document.title = this.pageTitle
     }
     attachCSS() {
         const style = document.createElement("style")
@@ -18,28 +19,61 @@ export default class HtmlAndCssHandler {
             body {
                 background: #0f0f0f;
             }
-            #game-container {
+            #root {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: 120px;
-                /* position: relative; */
             }
-            #start-button {
-                /* position: absolute;
-                top: 50%;
-                left: 50%; */
-            }
-            #moniter {
+            #display {
                 display: flex;
                 border: white 4px solid;
             }
-            #score {
-                color: #fff;
-                font-size: 25px;
-            }
         `
         document.head.appendChild(style)
+    }
+    attachDisplay() {
+        if(this.invalidDimensions()) {
+            console.error(`Invalid dimensions, dimension 1 must be between ${ this.minX } and ${ this.maxX } and dimension 2 must be between ${ this.minY } and ${ this.maxY }`)
+            return
+        }
+        if(this.invalidPixelSize()) {
+            console.error(`Invalid pixel size, pixel size must be between ${ this.minPixel } and ${ this.maxPixel }`)
+            return
+        }
+
+        const $root = document.createElement('div')
+        $root.setAttribute('id', 'root')
+        document.body.appendChild($root)
+
+        const $display = document.createElement('div')
+        $display.setAttribute('id', 'display')
+
+        let matrix = []
+        for(let i = 0; i < this.dimensions[0]; i++) {
+        let $pixelRowContainer = document.createElement('div')
+        matrix.push([])
+            for(let j = 0; j < this.dimensions[1]; j++) {
+                let $pixel = document.createElement('div')
+                $pixel.style.width = this.pixelSize + "px"
+                $pixel.style.height = this.pixelSize + "px"
+                $pixel.style.border = "white 1px solid"
+                $pixelRowContainer.appendChild($pixel)
+
+                matrix[i].push({
+                    color: null
+                })
+            }
+            $display.appendChild($pixelRowContainer)
+        }
+
+        $root.appendChild($display)
+        return matrix
+
+    }
+    main() {
+        this.setTitle()
+        this.attachCSS()
+        return this.attachDisplay()
     }
     invalidDimensions() {
         if(this.dimensions[0] < this.minX || this.dimensions[0] > this.maxX) {
@@ -53,22 +87,5 @@ export default class HtmlAndCssHandler {
         if(this.pixelSize < this.minPixel || this.pixelSize > this.maxPixel) {
             return true
         }
-    }
-    attachDisplay() {
-        if(this.invalidDimensions()) {
-            console.error(`Invalid dimensions, dimension 1 must be between ${ this.minX } and ${ this.maxX } and dimension 2 must be between ${ this.minY } and ${ this.maxY }`)
-            return
-        }
-        if(this.invalidPixelSize()) {
-            console.error(`Invalid pixel size, pixel size must be between ${ this.minPixel } and ${ this.maxPixel }`)
-            return
-        }
-    }
-    main() {
-        this.setTitle()
-        this.attachCSS()
-        this.attachDisplay()
-        let matrix = this.attachDisplay()
-        return matrix
     }
 }
