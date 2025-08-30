@@ -9,9 +9,9 @@ export default class HtmlAndCssHandler {
         this.maxY = 152
         this.minPixel = 7
         this.maxPixel = 15
-        this.p1x = config.defaultPoints[0][0]
+        this.p1X = config.defaultPoints[0][0]
         this.p1Y = config.defaultPoints[0][1]
-        this.p2x = config.defaultPoints[1][0]
+        this.p2X = config.defaultPoints[1][0]
         this.p2Y = config.defaultPoints[1][1]
     }
     setTitle() {
@@ -28,9 +28,18 @@ export default class HtmlAndCssHandler {
                 flex-direction: column;
                 align-items: center;
             }
+            #display-container {
+            }
             #display {
                 display: flex;
+                justify-content: flex-start;
                 border: white 4px solid;
+            }
+            .starting-point {
+                background: #ff0041;
+            }
+            .part-of-the-line {
+                background: #007a2c;
             }
         `
         document.head.appendChild(style)
@@ -57,44 +66,42 @@ export default class HtmlAndCssHandler {
         const $display = document.createElement('div')
         $display.setAttribute('id', 'display')
 
-        let matrix = []
         for(let i = 0; i < this.dimensions[0]; i++) {
         let $pixelRowContainer = document.createElement('div')
-        matrix.push([])
+
             for(let j = 0; j < this.dimensions[1]; j++) {
                 let $pixel = document.createElement('div')
                 $pixel.style.width = this.pixelSize + "px"
                 $pixel.style.height = this.pixelSize + "px"
                 $pixel.style.border = "#000 1px solid"
                 $pixelRowContainer.appendChild($pixel)
-
-                matrix[i].push({
-                    color: null
-                })
             }
             $display.appendChild($pixelRowContainer)
         }
 
-        $root.appendChild($display)
-        return matrix
-
+        const $displayContainer = document.createElement('div')
+        $displayContainer.appendChild($display)
+        $displayContainer.setAttribute('id', 'display-container')
+        $root.appendChild($displayContainer)
     }
     attachPointsInterface() {
-        const $root = document.getElementById('root')
+        const $displayContainer = document.getElementById('display-container')
         const $container = document.createElement('div')
 
-        const $p1x = document.createElement('div')
-        $p1x.innerHTML = this.p1x
+        const $p1X = document.createElement('div')
+        $p1X.innerHTML = this.p1X
+        const $p1Y = document.createElement('div')
+        $p1Y.innerHTML = this.p1Y
 
-        $container.appendChild($p1x)
-        $root.appendChild($container)
+        $container.appendChild($p1X)
+        $container.appendChild($p1Y)
+        $displayContainer.appendChild($container)
     }
     main() {
         this.setTitle()
         this.attachCSS()
-        const matrix = this.attachDisplay()
+        this.attachDisplay()
         this.attachPointsInterface()
-        return matrix
     }
     invalidDimensions() {
         if(this.dimensions[0] < this.minX || this.dimensions[0] > this.maxX) {
