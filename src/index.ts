@@ -1,8 +1,10 @@
 import Controller from "./components/controller.js"
 import HtmlAndCssHandler from "./components/html_and_css_handler.js"
+import ConfigInterface from './config/config.js'
 
 export default class App {
-    constructor(config) {
+    private config: ConfigInterface
+    constructor(config: ConfigInterface) {
         this.config = config
     }
     start() {

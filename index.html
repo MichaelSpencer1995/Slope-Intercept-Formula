@@ -7,8 +7,8 @@
 </head>
 <body>
 </body>
-<script type="module">
-    import App from "./index.js"
+<script type="text/javascript" src="dist/umd/SlopeInterceptPixels.min.js"></script>
+<script>
     const config = {
         dimensions: [50, 40],
         pixelSize: 10,
@@ -17,8 +17,9 @@
             [15, 4]
         ]
     }
-    let app = new App(config)
+    let app = new SlopeInterceptPixels(config)
     app.start()
+</script>
 </script>
 </script>
 </html>

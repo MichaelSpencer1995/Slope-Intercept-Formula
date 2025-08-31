@@ -1,4 +1,18 @@
 export default class HtmlAndCssHandler {
+    private pageTitle: string
+    private dimensions: number[]
+    private pixelSize: number
+    private minX: number
+    private maxX: number
+    private minY: number
+    private maxY: number
+    private minPixel: number
+    private maxPixel: number
+    private p1X: number
+    private p1Y: number
+    private p2X: number
+    private p2Y: number
+
     constructor(config) {
         this.pageTitle = "Plot pixels using slope intercept form"
         this.dimensions = config.dimensions
@@ -54,10 +68,10 @@ export default class HtmlAndCssHandler {
             return
         }
 
-        if(this.invalidDefaultPoints()) {
-            console.error('Starting points fall outside of the displays boundaries')
-            return
-        }
+        // if(this.invalidDefaultPoints()) {
+        //     console.error('Starting points fall outside of the displays boundaries')
+        //     return
+        // }
 
         const $root = document.createElement('div')
         $root.setAttribute('id', 'root')
@@ -89,13 +103,16 @@ export default class HtmlAndCssHandler {
         const $container = document.createElement('div')
 
         const $p1X = document.createElement('div')
-        $p1X.innerHTML = this.p1X
+        $p1X.innerHTML = this.p1X.toString()
         const $p1Y = document.createElement('div')
-        $p1Y.innerHTML = this.p1Y
+        $p1Y.innerHTML = this.p1Y.toString()
 
         $container.appendChild($p1X)
         $container.appendChild($p1Y)
-        $displayContainer.appendChild($container)
+
+        if($displayContainer != null) {
+            $displayContainer.appendChild($container)
+        }
     }
     main() {
         this.setTitle()
@@ -116,7 +133,7 @@ export default class HtmlAndCssHandler {
             return true
         }
     }
-    invalidDefaultPoints() {
+    // invalidDefaultPoints() {
 
-    }
+    // }
 }

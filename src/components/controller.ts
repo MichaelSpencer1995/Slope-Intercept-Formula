@@ -1,8 +1,16 @@
 export default class Controller {
+    private defaultPoints: number[][]
+    private dimensions: number[]
+    private $display: HTMLElement
+    private M: number
+    private B: number
     constructor(defaultPoints, dimensions) {
         this.defaultPoints = defaultPoints
         this.dimensions = dimensions
-        this.$display = document.getElementById('display')
+        const displayNullCheck = document.getElementById('display')
+        if(displayNullCheck != null) {
+            this.$display = displayNullCheck
+        }
         this.M
         this.B
     }
