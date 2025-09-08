@@ -18,11 +18,11 @@ export default class HtmlAndCssHandler {
         this.dimensions = config.dimensions
         this.pixelSize = config.pixelSize
         this.minX = 11
-        this.maxX = 112
+        this.maxX = 350
         this.minY = 14
-        this.maxY = 152
-        this.minPixel = 7
-        this.maxPixel = 15
+        this.maxY = 350
+        this.minPixel = 4
+        this.maxPixel = 20
         this.p1X = config.defaultPoints[0][0]
         this.p1Y = config.defaultPoints[0][1]
         this.p2X = config.defaultPoints[1][0]
@@ -87,7 +87,7 @@ export default class HtmlAndCssHandler {
                 let $pixel = document.createElement('div')
                 $pixel.style.width = this.pixelSize + "px"
                 $pixel.style.height = this.pixelSize + "px"
-                $pixel.style.border = "#000 1px solid"
+                $pixel.style.border = "1px solid rgb(209 209 209)"
                 $pixelRowContainer.appendChild($pixel)
             }
             $display.appendChild($pixelRowContainer)
@@ -114,11 +114,19 @@ export default class HtmlAndCssHandler {
             $displayContainer.appendChild($container)
         }
     }
+    addGithub() {
+        const $root = document.getElementById('root')
+        const $link = document.createElement('a')
+        $link.innerHTML = "Code"
+        $link.setAttribute('href', 'https://github.com/MichaelSpencer1995/Slope-Intercept-Formula')
+        $root.appendChild($link)
+    }
     main() {
         this.setTitle()
         this.attachCSS()
         this.attachDisplay()
         this.attachPointsInterface()
+        this.addGithub()
     }
     invalidDimensions() {
         if(this.dimensions[0] < this.minX || this.dimensions[0] > this.maxX) {
